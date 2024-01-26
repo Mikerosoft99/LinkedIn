@@ -36,4 +36,4 @@ To run this demo locally, follow these steps:
     cd linkedin-demo
     ```
 
-3. Open `index.html` in your preferred web browser.
+3. Open `signup.html` in your preferred web browser.
