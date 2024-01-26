@@ -27,7 +27,7 @@ To run this demo locally, follow these steps:
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/your-username/linkedin-demo.git
+    git clone https://github.com/Mikerosoft99/LinkedIn_Demo.git
     ```
 
 2. Open the project directory:
