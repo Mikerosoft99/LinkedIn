@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="download.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn - Feed</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/dce9d3d3f0.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: rgb(219, 219, 219);
+        }
+
+        .suggestion-card {
+            display: flex;
+            align-items: start;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .profile-image {
+            margin: 5px 0;
+            margin-right: 5px;
+            border-radius: 25px;
+        }
+
+        .profile-details {
+            line-height: 1.1;
+            font-size: 0.8rem;
+            margin: 10px 5px;
+        }
+
+        .profile-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .follow-btn {
+            padding: 3px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        footer {
+            padding: 10px 20px;
+        }
+
+        .post-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .post-section img {
+            width: 48px;
+            height: 48px;
+            margin-right: 10px;
+        }
+
+        .post-section input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+        }
+
+        .links-section {
+            display: flex;
+            justify-content: center;
+            justify-content: space-around;
+        }
+
+        .card-body {
+            border-radius: 20px;
+        }
+
+        .post-container {
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-image {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .header-info {
+            flex: 1;
+        }
+
+        .name {
+            margin: 0;
+        }
+
+        .title {
+            margin: 5px 0;
+            font-size: 0.8rem;
+            color: #8c8c8c;
+        }
+
+        .post-content {
+            margin-top: 10px;
+        }
+
+        .post-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" style="font-weight: bold;">
+                <img src="download.png" width="30" height="30" class="d-inline-block align-top" alt="LinkedIn Logo">
+                LinkedIn
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-users"></i> My Network</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-briefcase"></i> Jobs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-comment"></i> Messaging</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-bell"></i> Notifications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-user" id="username-icon"></i> <span
+                                class="username-text">Profile </span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            Logout</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-primary" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <div class="user-info container-fluid mt-3">
+        <div class="row">
+
+            <div class="col-lg-3 col-md-4 d-none d-md-block">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center mb-3">
+                            <img src="Unknown_person.jpg" alt="Profile Picture" class="img-fluid rounded-circle"
+                                style="width: 100px; height:100px;">
+                            <h5 class="mt-2 username-text"></h5>
+                        </div>
+                        <h6 align="center" class="card-subtitle mb-2 text-muted">Software Developer</h6>
+                        <hr>
+                        <div class="mb-4">
+                            <h6 class="card-subtitle mb-2 text-muted"><i class="fa-solid fa-circle-nodes"></i>
+                                Connections</h6>
+                            <p>500+ Connections</p>
+                        </div>
+                        <hr>
+                        <div class="mb-4">
+                            <h6 class="card-subtitle mb-2 text-muted"><i class="fa-solid fa-wand-sparkles"></i> Boost
+                                your job search</h6>
+                            <a href="#"><i class="fa-solid fa-money-check-dollar"></i> Try Premium for EGP0</a>
+                        </div>
+                        <hr>
+                        <div>
+                            <a href="#">
+                                <h6 class="card-subtitle mb-2 text-muted"><i class="fa-solid fa-bookmark"></i> My Items
+                                </h6>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-8 col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="post-section">
+                            <img class="profile-image" src="Unknown_person.jpg" alt="profile image">
+                            <input class="post" type="text" placeholder="Start a post">
+                        </div>
+
+                        <div class="links-section">
+                            <a href="#" class="link"><i class="fa-regular fa-images"></i> Media</a>
+                            <a href="#" class="link"><i class="fa-regular fa-calendar-plus"></i> Event</a>
+                            <a href="#" class="link"><i class="fa-regular fa-newspaper"></i> Write Article</a>
+                        </div>
+                        <hr class="my-4">
+                        <div class="post-container mt-3">
+                            <div class="post-header">
+                                <img src="fatima_profile.jpg" alt="Profile Image" class="profile-image">
+                                <div class="header-info">
+                                    <a href="">
+                                        <h6 class="name">Fatima Safdar</h6>
+                                    </a>
+                                    <p class="title">Full Stack Web Developer | WebFlow</p>
+                                </div>
+                                <button class="follow-btn btn btn-outline-primary">Follow</button>
+                            </div>
+                            <div class="post-content mt-3">
+                                <p>🚀 100 REACT Interview Questions</p>
+                                <p>❤️️ Give it a like if you think it's helpful! 👍</p>
+                                <p>📥 Don't forget to Save it.</p>
+                                <p>💚 Follow Fatima Safdar for more</p>
+                                <p>Learn React with W3Schools.com</p>
+                                <p>👉 Credit: Codaroo</p>
+                                <p>#javascript #javascriptdeveloper #javascriptlearning
+                                    #react #reactjs #reactdeveloper #frontend
+                                    #frontenddeveloper #frontenddevelopment #webdevelopment
+                                    #webdeveloper #connect #follow</p>
+                            </div>
+                            <img src="post.jpg" alt="Post Image" class="post-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 d-none d-lg-block">
+                <div class="card">
+                    <div class="card-body">
+                        <div>
+                            <h4>
+                                Add to your feed
+                            </h4>
+                        </div>
+                        <div class="suggestion-card">
+                            <a href="/in/dr-heba-saleh/" class="profile-link">
+                                <img width="48"
+                                    src="https://media.licdn.com/dms/image/C5603AQE6-52cnNiWYQ/profile-displayphoto-shrink_100_100/0/1604302051283?e=1711584000&amp;v=beta&amp;t=yLRKCC9kO89TcVbh0erv2l3ZFk7SNMq_K4FU67H15U0"
+                                    alt="Heba Saleh, PhD." class="profile-image">
+                            </a>
+                            <div class="profile-details">
+                                <a href="/in/dr-heba-saleh/" class="profile-link">
+                                    <p class="profile-name">Heba Saleh, PhD.</p>
+                                    <p class="profile-role">Chairwoman at Information Technology Institute (ITI),
+                                        Egyptian Ministry of Communication and Technology (MCIT)</p>
+                                </a>
+                                <button class="follow-btn btn btn-outline-primary">Follow</button>
+                            </div>
+                        </div>
+                        <div class="suggestion-card">
+                            <a href="/company/microsoft/" class="profile-link">
+                                <img width="48" height="48"
+                                    src="https://media.licdn.com/dms/image/C560BAQE88xCsONDULQ/company-logo_100_100/0/1630652622688/microsoft_logo?e=1714003200&amp;v=beta&amp;t=I1-eVsT4hAWpKvmmoWm4OWCMEQfFQCXZjBe6u8pnh-A"
+                                    alt="Microsoft" class="profile-image">
+                            </a>
+                            <div class="profile-details">
+                                <a href="/company/microsoft/" class="profile-link">
+                                    <p class="profile-name">
+                                        <span>Microsoft</span>
+                                    </p>
+                                    <p class="profile-category">Company • Computer Software</p>
+                                </a>
+                                <button class="follow-btn btn btn-outline-primary">Follow</button>
+                            </div>
+                        </div>
+
+                        <div class="suggestion-card">
+                            <a href="/company/amazon/" class="profile-link">
+                                <img width="48" height="48"
+                                    src="https://media.licdn.com/dms/image/C560BAQHTvZwCx4p2Qg/company-logo_100_100/0/1630640869849/amazon_logo?e=1714003200&amp;v=beta&amp;t=Ieh6v4VMOe-XbKwu8FbT5tJfVYPzrB_RMT9u8Ce8SQA"
+                                    alt="Amazon" class="profile-image">
+                            </a>
+                            <div class="profile-details">
+                                <a href="/company/amazon/" class="profile-link">
+                                    <p class="profile-name">Amazon</p>
+                                    <div>
+                                        <p class="profile-category">Company • Computer Software</p>
+                                    </div>
+                                </a>
+                                <button class="follow-btn btn btn-outline-primary">Follow</button>
+                            </div>
+                        </div>
+                        <a href="#">
+                            View all recommendations
+                        </a>
+                        <footer class="mt-3">
+                            <h5>Legal</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#">User Agreement</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Cookie Policy</a></li>
+                                <li><a href="#">Copyright Policy</a></li>
+                                <li><a href="#">Brand Policy</a></li>
+                            </ul>
+                            <h5>Accessibility</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#">Accessibility Statement</a></li>
+                                <li><a href="#">Terms of Service</a></li>
+                            </ul>
+                            <h5>Community</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#">Guest Controls</a></li>
+                                <li><a href="#">Community Guidelines</a></li>
+                            </ul>
+                            <span class="rights d-block mt-auto">All Rights Reserved © 2024</span>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            var currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
+            var username = currentUser.username || '';
+
+            $('.username-text').text(username);
+            $('#username-icon').removeClass('fas fa-user').addClass('fas fa-user-circle');
+
+            $('#logout').on('click', function () {
+                localStorage.removeItem('currentUser');
+                window.location.href = 'signin.html';
+            });
+        });
+    </script>
+</body>
+
+</html>
